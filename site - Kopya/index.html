@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryzen Network  | Minecraft Sunucusu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Rubik:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* CSS Değişkenleri - SAF MAVİ FANTASY TEMA */
+        :root {
+            --color-dark-bg: #0d131f;
+            --color-mid-bg: #1e293b;
+            --color-primary: #3b82f6;
+            --color-secondary: #60a5fa;
+            --color-text-light: #e2e8f0;
+            --color-gold: #facc15;
+            --color-muted: #94a3b8;
+            --color-discord: #5865F2; /* YENİ EKLENDİ */
+            --font-rubik: 'Rubik', sans-serif;
+            --font-montserrat: 'Montserrat', sans-serif;
+        }
+
+        /* Temel ve Ortak Stiller */
+        * { transition: all 0.4s ease; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { margin: 0; font-family: var(--font-montserrat); background: var(--color-dark-bg); color: var(--color-text-light); line-height: 1.6; }
+
+        /* Navigasyon Stilleri */
+        nav { position: sticky; top: 0; z-index: 1000; background: rgba(13, 19, 31, 0.98); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-rubik); font-size: 28px; color: var(--color-primary); text-decoration: none; font-weight: 900; }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { color: var(--color-text-light); text-decoration: none; font-weight: 600; margin-left: 30px; padding: 8px 0; border-bottom: 2px solid transparent; }
+        .nav-links a:hover { color: var(--color-secondary); border-bottom-color: var(--color-secondary); }
+        
+        /* Giriş/Kayıt Buton Stilleri */
+        .btn-login { color: var(--color-text-light) !important; font-weight: 600; text-decoration: none; margin-left: 30px; padding: 10px 15px; border-radius: 5px; }
+        .btn-login:hover { color: var(--color-primary) !important; background: rgba(59, 130, 246, 0.1); }
+        .btn-register { color: var(--color-text-light) !important; font-weight: 600; text-decoration: none; margin-left: 10px; padding: 10px 15px; border-radius: 5px; }
+        .btn-register:hover { color: var(--color-primary) !important; background: rgba(59, 130, 246, 0.1); }
+
+        /* GÜNCELLENMİŞ DISCORD BUTON STİLLERİ (Büyütülmüş) */
+        .btn-discord { 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px; /* İkon ve yazı arasına boşluk */
+            background: var(--color-discord); 
+            padding: 15px 35px; /* Daha büyük mavi alan */
+            border-radius: 50px; 
+            color: white; 
+            text-decoration: none; 
+            font-size: 18px; /* Yazı boyutu aynı kaldı */
+            font-weight: bold; 
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4); 
+            text-transform: uppercase; 
+            margin-left: 15px; 
+        }
+        .btn-discord i {
+            font-size: 28px; /* İkon boyutu büyütüldü */
+        }
+        .btn-discord:hover { 
+            background: #4752C4; 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.6); 
+        }
+
+        /* Hero Stilleri */
+        .hero-section { height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, rgba(59, 130, 246, 0.1) 0%, var(--color-dark-bg) 80%); }
+        .hero-section h1 { font-family: var(--font-rubik); font-size: 100px; color: white; text-shadow: 0 0 40px rgba(59, 130, 246, 0.5); margin: 0; }
+        .hero-section p { font-size: 26px; color: var(--color-text-light); margin-top: 10px; margin-bottom: 40px; }
+        
+        /* IP Kopyalama Stilleri */
+        .ip-copy-container { margin-top: 15px; display: flex; align-items: center; cursor: pointer; padding: 10px 20px; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.3); background: rgba(30, 41, 59, 0.5); }
+        .ip-copy-container:hover { background: rgba(96, 165, 250, 0.2); border-color: var(--color-primary); }
+        .ip-address-text { font-family: var(--font-rubik); font-size: 32px; color: var(--color-text-light); margin-right: 15px; }
+        .copy-icon { color: var(--color-primary); font-size: 20px; }
+        .copy-message { position: absolute; background: var(--color-primary); color: white; padding: 8px 15px; border-radius: 5px; margin-top: 100px; opacity: 0; transform: translateY(-10px); transition: opacity 0.3s, transform 0.3s; }
+        .copy-message.show { opacity: 1; transform: translateY(0); }
+
+        /* Kart Stilleri */
+        .info-grid { padding: 80px 20px; max-width: 1100px; margin: auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .base-card { background: var(--color-mid-bg); padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: transform 0.4s ease; border-left: 5px solid var(--color-secondary); }
+        .base-card:hover { transform: scale(1.03); box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3); }
+        .base-card i { font-size: 50px; color: var(--color-primary); margin-bottom: 15px; }
+        .base-card h3 { font-family: var(--font-rubik); color: var(--color-secondary); margin-top: 0;}
+
+        /* Footer Stilleri */
+        footer { background: var(--color-mid-bg); padding: 35px; text-align: center; color: var(--color-muted); border-top: 3px solid var(--color-primary); }
+        footer a { color: var(--color-secondary); text-decoration: none; }
+        
+        /* Mobil Duyarlılık */
+        @media (max-width: 900px) { 
+            nav { flex-direction: column; }
+            .nav-links { flex-wrap: wrap; justify-content: center; margin-top: 10px; }
+            .nav-links a { margin: 5px 10px; }
+            .hero-section h1 { font-size: 60px; }
+            .hero-section p { font-size: 20px; }
+            .ip-address-text { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">CRYZEN</a>
+    <div class="nav-links">
+        <a href="index.html" style="color: var(--color-primary); border-bottom-color: var(--color-primary);">Anasayfa</a>
+        <a href="modes.html">Oyun Modları</a>
+        <a href="market.html">Market</a>
+        <a href="news.html">Duyurular/Haberler</a>
+        <a href="social.html">Sosyal Medya</a>
+        
+        <a href="login.html" class="btn-login"><i class="fas fa-sign-in-alt"></i> Giriş Yap</a>
+        <a href="register.html" class="btn-register"><i class="fas fa-user-plus"></i> Hesap Oluştur</a>
+        
+        <a class="btn-discord" href="https://discord.gg/z2KejrWBrH" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+    </div>
+</nav>
+
+<div class="hero-section">
+    <h1>CRYZEN NETWORK</h1>
+    <p>Minecraft Diyarının En Kaliteli Macerasına Atılın! ️</p>
+    
+    <div class="ip-copy-container" onclick="copyIP('oyna.cryzennetwork.com.tr')">
+        <span class="ip-address-text">oyna.cryzennetwork.com.tr</span>
+        <i class="fas fa-scroll copy-icon"></i>
+    </div>
+    
+    <div id="copy-status" class="copy-message">IP Adresi Kopyalandı!</div>
+</div>
+
+<div class="info-grid">
+    <div class="base-card info-card">
+        <i class="fas fa-shield-alt"></i>
+        <h3>Adil Yönetim</h3>
+        <p>Oyuncularımıza 7/24 huzurlu bir oyun ortamı sunmaya çalışıyoruz.</p>
+    </div>
+    <div class="base-card info-card">
+        <i class="fas fa-flask"></i>
+        <h3>Sadece Cryzen'de</h3>
+        <p>Mevsim döngüsü gibi diğer sunuculardan ayrılan birçok özelliğiyle Cryzen .</p>
+    </div>
+    <div class="base-card info-card">
+        <i class="fas fa-users"></i>
+        <h3>Büyük Topluluk</h3>
+        <p>Discord sunucumuzda yüzlerce aktif oyuncu seni bekliyor!</p>
+    </div>
+</div>
+
+<footer>
+    <p>
+        © 2025 Cryzen Network | Tüm Hakları Saklıdır.<br>
+        <a href="https://discord.gg/z2KejrWBrH" target="_blank">Discord Topluluğu</a> | <a href="#">Kurallar Kitabı</a>
+    </p>
+</footer>
+
+<script>
+    function copyIP(ip) {
+        navigator.clipboard.writeText(ip)
+            .then(() => {
+                const statusElement = document.getElementById('copy-status');
+                statusElement.classList.add('show');
+                setTimeout(() => {
+                    statusElement.classList.remove('show');
+                }, 1500);
+            })
+            .catch(err => {
+                console.error('Kopyalama hatası:', err);
+                alert('IP adresi kopyalanamadı: ' + ip);
+            });
+    }
+</script>
+
+</body>
+</html>

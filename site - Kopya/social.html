@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryzen Network 🌐 | Sosyal Medya</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Rubik:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* CSS Değişkenleri - SAF MAVİ FANTASY TEMA */
+        :root {
+            --color-dark-bg: #0d131f;      
+            --color-mid-bg: #1e293b;       
+            --color-primary: #3b82f6;      
+            --color-secondary: #60a5fa;     
+            --color-text-light: #e2e8f0;   
+            --color-gold: #facc15;         
+            --color-muted: #94a3b8;        
+            --color-discord: #5865F2; /* YENİ EKLENDİ */
+            --font-rubik: 'Rubik', sans-serif; 
+            --font-montserrat: 'Montserrat', sans-serif; 
+
+            /* Sosyal Medya Renkleri */
+            --color-youtube: #FF0000;
+            --color-instagram: #E4405F;
+            --color-twitter: #1DA1F2;
+            --color-tiktok: #EE1D52;
+        }
+
+        /* Temel ve Ortak Stiller */
+        * { transition: all 0.4s ease; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { margin: 0; font-family: var(--font-montserrat); background: var(--color-dark-bg); color: var(--color-text-light); line-height: 1.6; }
+
+        /* Navigasyon Stilleri */
+        nav { position: sticky; top: 0; z-index: 1000; background: rgba(13, 19, 31, 0.98); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-rubik); font-size: 28px; color: var(--color-primary); text-decoration: none; font-weight: 900; }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { color: var(--color-text-light); text-decoration: none; font-weight: 600; margin-left: 30px; padding: 8px 0; border-bottom: 2px solid transparent; }
+        .nav-links a:hover { color: var(--color-secondary); border-bottom-color: var(--color-secondary); }
+        
+        /* Giriş/Kayıt Buton Stilleri */
+        .btn-login { color: var(--color-text-light) !important; font-weight: 600; text-decoration: none; margin-left: 30px; padding: 10px 15px; border-radius: 5px; }
+        .btn-login:hover { color: var(--color-primary) !important; background: rgba(59, 130, 246, 0.1); }
+        .btn-register { color: var(--color-text-light) !important; font-weight: 600; text-decoration: none; margin-left: 10px; padding: 10px 15px; border-radius: 5px; }
+        .btn-register:hover { color: var(--color-primary) !important; background: rgba(59, 130, 246, 0.1); }
+
+        /* GÜNCELLENMİŞ DISCORD BUTON STİLLERİ (Büyütülmüş) */
+        .btn-discord { 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--color-discord); 
+            padding: 15px 35px;
+            border-radius: 50px; 
+            color: white; 
+            text-decoration: none; 
+            font-size: 18px; 
+            font-weight: bold; 
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4); 
+            text-transform: uppercase; 
+            margin-left: 15px; 
+        }
+        .btn-discord i {
+            font-size: 28px;
+        }
+        .btn-discord:hover { 
+            background: #4752C4; 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.6); 
+        }
+
+        /* Ana İçerik Bölümü */
+        .content-container { padding: 50px 20px; max-width: 1200px; margin: auto; min-height: 80vh; text-align: center; }
+        .content-container h2 {
+            font-family: var(--font-rubik); 
+            font-size: 42px; 
+            margin-bottom: 20px; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            color: var(--color-primary); 
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.5); 
+        }
+        .content-container p {
+            max-width: 800px;
+            margin: 0 auto 60px auto;
+            font-size: 18px;
+            color: var(--color-text-light);
+        }
+
+        /* Sosyal Medya Kartları Düzeni */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        /* Sosyal Medya Kart Stilleri */
+        .social-card {
+            background: var(--color-mid-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 280px; 
+            position: relative;
+            overflow: hidden;
+        }
+        .social-card::before { 
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--card-color); 
+        }
+
+        .social-card i {
+            font-size: 60px; 
+            margin-bottom: 20px;
+            color: var(--card-color); 
+        }
+        .social-card h3 {
+            font-family: var(--font-rubik);
+            font-size: 28px;
+            color: var(--color-text-light);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .social-card p {
+            font-size: 15px;
+            color: var(--color-muted);
+            flex-grow: 1; 
+        }
+        .social-card .btn-social {
+            padding: 10px 25px;
+            font-size: 16px;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 20px;
+            background: var(--card-color); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s, filter 0.3s;
+        }
+        .social-card .btn-social:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            filter: brightness(1.1); 
+        }
+
+        /* Her kart için özel renkler */
+        .social-card.discord { --card-color: var(--color-discord); }
+        .social-card.youtube { --card-color: var(--color-youtube); }
+        .social-card.instagram { --card-color: var(--color-instagram); }
+        .social-card.twitter { --card-color: var(--color-twitter); }
+        .social-card.tiktok { --card-color: var(--color-tiktok); }
+
+
+        /* Footer Stilleri */
+        footer { background: var(--color-mid-bg); padding: 35px; text-align: center; color: var(--color-muted); border-top: 3px solid var(--color-primary); }
+        footer a { color: var(--color-secondary); text-decoration: none; }
+
+        /* Mobil Duyarlılık */
+        @media (max-width: 900px) { 
+            nav { flex-direction: column; }
+            .nav-links { flex-wrap: wrap; justify-content: center; margin-top: 10px; }
+            .nav-links a { margin: 5px 10px; }
+            .content-container h2 { font-size: 32px; }
+            .social-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">CRYZEN">CRYZEN</a>
+    <div class="nav-links">
+        <a href="index.html">Anasayfa</a>
+        <a href="modes.html">Oyun Modları</a>
+        <a href="market.html">Market</a>
+        <a href="news.html">Duyurular/Haberler</a>
+        <a href="social.html" style="color: var(--color-primary); border-bottom-color: var(--color-primary);">Sosyal Medya</a>
+        
+        <a href="login.html" class="btn-login"><i class="fas fa-sign-in-alt"></i> Giriş Yap</a>
+        <a href="register.html" class="btn-register"><i class="fas fa-user-plus"></i> Hesap Oluştur</a>
+        
+        <a class="btn-discord" href="https://discord.gg/z2KejrWBrH" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+    </div>
+</nav>
+
+<div class="content-container">
+    <h2>🌐 Bizi Takip Edin!</h2>
+    <p>Cryzen Network'ün büyülü dünyasındaki en son gelişmeleri, etkinlikleri ve topluluk anlarını kaçırmamak için sosyal medya platformlarımızda bize katılın!</p>
+
+    <div class="social-grid">
+        
+        <div class="social-card discord">
+            <i class="fab fa-discord"></i>
+            <h3>Discord</h3>
+            <p>Canlı sohbetlerimize katılın, diğer oyuncularla tanışın ve yönetim ekibiyle doğrudan iletişim kurun.</p>
+            <a class="btn-social" href="https://discord.gg/z2KejrWBrH" target="_blank">Topluluğa Katıl</a>
+        </div>
+
+        <div class="social-card youtube">
+            <i class="fab fa-youtube"></i>
+            <h3>YouTube</h3>
+            <p>Oyun içi tanıtım videoları, etkinlik özetleri, rehberler ve daha fazlası için kanalımıza abone olun.</p>
+            <a class="btn-social" href="https://www.youtube.com/@cryzennetwork" target="_blank">Kanalımıza Abone Ol</a>
+        </div>
+
+        <div class="social-card instagram">
+            <i class="fab fa-instagram"></i>
+            <h3>Instagram</h3>
+            <p>En güzel oyun içi ekran görüntülerini, kısa videoları ve duyuruları takip edin.</p>
+            <a class="btn-social" href="https://www.instagram.com/cryzennetwork/" target="_blank">Takip Et</a>
+        </div>
+
+        <div class="social-card twitter">
+            <i class="fab fa-twitter"></i>
+            <h3>Twitter</h3>
+            <p>Anlık güncellemeler, küçük duyurular ve özel kodlar için bizi takip edin.</p>
+            <a class="btn-social" href="https://twitter.com/cryzennetwork" target="_blank">Takip Et</a>
+        </div>
+
+        <div class="social-card tiktok">
+            <i class="fab fa-tiktok"></i>
+            <h3>TikTok</h3>
+            <p>Eğlenceli ve kısa oyun içi videolarımızla Cryzen dünyasına farklı bir bakış atın.</p>
+            <a class="btn-social" href="https://www.tiktok.com/@cryzennetwork" target="_blank">Takip Et</a>
+        </div>
+        
+    </div>
+</div>
+
+<footer>
+    <p>
+        © 2025 Cryzen Network | Tüm Hakları Saklıdır.<br>
+        <a href="https://discord.gg/z2KejrWBrH" target="_blank">Discord Topluluğu</a> | <a href="#">Kurallar Kitabı</a>
+    </p>
+</footer>
+
+</body>
+</html>

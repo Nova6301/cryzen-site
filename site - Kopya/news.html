@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryzen Network 📰 | Duyurular ve Haberler</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Rubik:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* CSS Değişkenleri - SAF MAVİ FANTASY TEMA */
+        :root {
+            --color-dark-bg: #0d131f;      
+            --color-mid-bg: #1e293b;       
+            --color-primary: #3b82f6;      
+            --color-secondary: #60a5fa;     
+            --color-text-light: #e2e8f0;   
+            --color-gold: #facc15;         
+            --color-muted: #94a3b8;        
+            --color-discord: #5865F2; /* YENİ EKLENDİ */
+            --font-rubik: 'Rubik', sans-serif; 
+            --font-montserrat: 'Montserrat', sans-serif; 
+        }
+
+        /* Temel ve Ortak Stiller */
+        * { transition: all 0.4s ease; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { margin: 0; font-family: var(--font-montserrat); background: var(--color-dark-bg); color: var(--color-text-light); line-height: 1.6; }
+
+        /* Navigasyon Stilleri */
+        nav { position: sticky; top: 0; z-index: 1000; background: rgba(13, 19, 31, 0.98); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: var(--font-rubik); font-size: 28px; color: var(--color-primary); text-decoration: none; font-weight: 900; }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { color: var(--color-text-light); text-decoration: none; font-weight: 600; margin-left: 30px; padding: 8px 0; border-bottom: 2px solid transparent; }
+        .nav-links a:hover { color: var(--color-secondary); border-bottom-color: var(--color-secondary); }
+        
+        /* Giriş/Kayıt Buton Stilleri */
+        .btn-login { color: var(--color-text-light) !important; font-weight: 600; text-decoration: none; margin-left: 30px; padding: 10px 15px; border-radius: 5px; }
+        .btn-login:hover { color: var(--color-primary) !important; background: rgba(59, 130, 246, 0.1); }
+        .btn-register { color: var(--color-text-light) !important; font-weight: 600; text-decoration: none; margin-left: 10px; padding: 10px 15px; border-radius: 5px; }
+        .btn-register:hover { color: var(--color-primary) !important; background: rgba(59, 130, 246, 0.1); }
+
+        /* GÜNCELLENMİŞ DISCORD BUTON STİLLERİ (Büyütülmüş) */
+        .btn-discord { 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--color-discord); 
+            padding: 15px 35px;
+            border-radius: 50px; 
+            color: white; 
+            text-decoration: none; 
+            font-size: 18px; 
+            font-weight: bold; 
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); 
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4); 
+            text-transform: uppercase; 
+            margin-left: 15px; 
+        }
+        .btn-discord i {
+            font-size: 28px;
+        }
+        .btn-discord:hover { 
+            background: #4752C4; 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.6); 
+        }
+
+        /* Başlık ve Bölüm Stilleri */
+        h2 { font-family: var(--font-rubik); font-size: 36px; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2px; color: var(--color-primary); text-shadow: 0 0 5px rgba(59, 130, 246, 0.3); text-align: center;} 
+        .content-container { padding: 50px 20px; max-width: 1200px; margin: auto; min-height: 80vh; }
+        
+        /* Ana İçerik Düzeni (Sol Haberler, Sağ Widget) */
+        .news-layout {
+            display: flex;
+            gap: 40px;
+        }
+
+        .main-news-section {
+            flex: 3; /* Haberler daha geniş yer kaplasın */
+        }
+
+        .sidebar-widgets {
+            flex: 1; 
+            min-width: 300px;
+        }
+
+        /* HABER KARTI STİLİ */
+        .news-card {
+            display: flex;
+            background: var(--color-mid-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border-left: 5px solid var(--color-primary);
+        }
+        .news-card-image {
+            width: 35%; 
+            min-width: 200px;
+            background-size: cover;
+            background-position: center;
+            height: auto;
+        }
+        .news-card-content {
+            padding: 25px;
+        }
+        .news-card-content h3 {
+            font-family: var(--font-rubik);
+            color: var(--color-secondary);
+            margin-top: 0;
+            font-size: 24px;
+        }
+        .news-card-content p {
+            font-size: 15px;
+            color: var(--color-text-light);
+            margin-bottom: 20px;
+        }
+        .news-date {
+            font-size: 12px;
+            color: var(--color-muted);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* SAĞ SİDEBAR WIDGET'LARI */
+        .widget {
+            background: var(--color-mid-bg);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .widget h4 {
+            font-family: var(--font-rubik);
+            color: var(--color-gold);
+            border-bottom: 2px solid var(--color-dark-bg);
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        /* Discord Iframe Stili */
+        .discord-iframe-container {
+            height: 350px; 
+            margin-top: 15px;
+        }
+        .discord-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px;
+        }
+
+        /* Footer Stilleri */
+        footer { background: var(--color-mid-bg); padding: 35px; text-align: center; color: var(--color-muted); border-top: 3px solid var(--color-primary); }
+        footer a { color: var(--color-secondary); text-decoration: none; }
+
+        /* Mobil Duyarlılık */
+        @media (max-width: 992px) {
+            .news-layout {
+                flex-direction: column;
+            }
+            .sidebar-widgets {
+                min-width: auto;
+            }
+            .news-card {
+                flex-direction: column;
+            }
+            .news-card-image {
+                width: 100%;
+                height: 200px; 
+            }
+        }
+        @media (max-width: 768px) {
+             nav { flex-direction: column; padding: 15px 20px; }
+             .nav-links { flex-wrap: wrap; justify-content: center; margin-top: 10px; }
+             .nav-links a { margin: 5px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="logo">CRYZEN</a>
+    <div class="nav-links">
+        <a href="index.html">Anasayfa</a>
+        <a href="modes.html">Oyun Modları</a>
+        <a href="market.html">Market</a>
+        <a href="news.html" style="color: var(--color-primary); border-bottom-color: var(--color-primary);">Duyurular/Haberler</a>
+        <a href="social.html">Sosyal Medya</a>
+        
+        <a href="login.html" class="btn-login"><i class="fas fa-sign-in-alt"></i> Giriş Yap</a>
+        <a href="register.html" class="btn-register"><i class="fas fa-user-plus"></i> Hesap Oluştur</a>
+        
+        <a class="btn-discord" href="https://discord.gg/z2KejrWBrH" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+    </div>
+</nav>
+
+<div class="content-container">
+    <h2>📰 Duyurular & Haberler</h2>
+
+    <div class="news-layout">
+        <div class="main-news-section">
+            
+            <div class="news-card">
+                <div class="news-card-image" style="background-image: url('images/survival_sezon.jpg');"></div>
+                <div class="news-card-content">
+                    <span class="news-date">GÜNCELLEME | 10 Kasım 2025</span>
+                    <h3>SURVIVAL 1. SEZON [1.16.5 - 1.20.1]</h3>
+                    <p>Survival sunucumuz  sürüm aralığı : **1.16.5'ten 1.20.1'e** kadar tam destek! Güncellenmiş mekanikler, güçlü görevler ve bölgeleri keşfetmeye hazır olun.</p>
+                    <a href="#" class="btn-discord" style="padding: 8px 15px; font-size: 14px; margin-left: 0;"></a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <div class="news-card-image" style="background-image: url('images/skyblock_guncelleme.jpg');"></div>
+                <div class="news-card-content">
+                    <span class="news-date">GELİŞTİRME | Aralık 2025</span>
+                    <h3>SKYBLOCK YENİ SEZON GÜNCELLEMESİ [1.21.8]</h3>
+                    <p>SkyBlock Yeni Sezon Güncellemesi: Yakında açılacak olan SkyBlock sunucumuzda Yeni nesil adalar ve dinamik görevler sizleri bekliyor.</p>
+                    <a href="#" class="btn-discord" style="padding: 8px 15px; font-size: 14px; margin-left: 0;"></a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <div class="news-card-image" style="background-image: url('images/event_banner.jpg');"></div>
+                <div class="news-card-content">
+                    <span class="news-date">ETKİNLİK | 2026</span>
+                    <h3>Yeni Güncellemelerden Haberdar Olmak İçin Discord Sunucumuza Katılmayı Unutmayın ❄️</h3>
+                    <p></p>
+                    <a href="#" class="btn-discord" style="padding: 8px 15px; font-size: 14px; margin-left: 0;"></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-widgets">
+            
+            <div class="widget">
+                <h4><i class="fab fa-discord"></i> Discord Üyeleri</h4>
+                <div class="discord-iframe-container">
+                    <iframe src="https://discord.com/widget?id=DISCORD_SERVER_ID&theme=dark" 
+                            class="discord-iframe" 
+                            allowtransparency="true" 
+                            frameborder="0" 
+                            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+                    </iframe>
+                </div>
+                <a class="btn-discord" href="https://discord.gg/z2KejrWBrH" target="_blank" style="width: 100%; text-align: center; margin-top: 10px; margin-left: 0;">Discord'a Katıl</a>
+            </div>
+            
+            <div class="widget">
+                <h4><i class="fab fa-youtube" style="color: #ff0000;"></i> YouTube Kanalımız</h4>
+                <p style="text-align: center; font-size: 14px; margin-bottom: 15px; color: var(--color-muted);">En yeni tanıtım videosunu kaçırmayın!</p>
+                <div style="aspect-ratio: 16 / 9; background: #334155; border-radius: 5px;">
+                    [YouTube Video Iframe Yer Tutucu]
+                </div>
+                <a class="btn-discord" href="#" target="_blank" style="width: 100%; text-align: center; margin-top: 15px; background: #ff0000; box-shadow: 0 4px 15px rgba(255, 0, 0, 0.4); margin-left: 0;">Kanalı Ziyaret Et</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>
+        © 2025 Cryzen Network | Tüm Hakları Saklıdır.<br>
+        <a href="https://discord.gg/z2KejrWBrH" target="_blank">Discord Topluluğu</a> | <a href="#">Kurallar Kitabı</a>
+    </p>
+</footer>
+
+</body>
+</html>
